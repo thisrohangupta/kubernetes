@@ -1,4 +1,4 @@
-name: CI
+name: Deploy Service
 on:
   - pull_request
 jobs:
@@ -7,9 +7,9 @@ jobs:
     name: Deploy Nginx
     steps:
     - uses: actions/checkout@v2
-    - name: Infrastructure 
+    - name: Infrastructure Setup
       uses: medyagh/setup-minikube@master
-    - name: Try the cluster !
+    - name: Try the cluster!
       run: kubectl get pods -A       
     - name: Rolling Deploy
       run:
