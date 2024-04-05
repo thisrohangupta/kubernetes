@@ -18,11 +18,14 @@ jobs:
     - name: Fetch Files
       uses: actions/checkout@v2
     - name: Prepare Manifest
-      run: |
-        go run render_template.go deployment.yaml values.yaml > rendered_deployment.yaml   
+      uses: yukitsune/template-cli@v0.1.0
+      with:
+        args: --input deployment.yaml \
+          --value "name=nginx" \
+          --output .
     - name: Apply
       run: |
-        kubectl apply -f rendered_deployment.yaml       
+        kubectl apply -f deployment.yaml       
     - name: Wait for Steady State Check
       run: |
         minikube service list
