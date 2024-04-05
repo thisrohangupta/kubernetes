@@ -19,4 +19,4 @@ jobs:
         minikube service list
         minikube service nginx --url
         echo "------------------opening the service------------------"
-        curl $(minikube service example --url)        
+        curl $(minikube service nginx --url)        
