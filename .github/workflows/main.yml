@@ -15,6 +15,9 @@ jobs:
         echo "Artifact Tag: $ARTIFACT_TAG"
     - name: Dynamic Provisioned Infrastructure - K8s Cluster
       uses: medyagh/setup-minikube@master
+    - name: Dynamic Provision Infrastructure - Create Namespace
+      run: |
+        kubectl create namespace develop
     - name: Fetch Files
       uses: actions/checkout@v2
     - name: Prepare Manifest
@@ -22,10 +25,16 @@ jobs:
         echo "Similuate the go template and rendered manifest"
         cat deployment.yaml
         cat values.yaml
+    - name: Dry Run
+      run: |
+        kubectl apply -f deployment.yaml --dry-run
     - name: Apply
       run: |
-        kubectl apply -f deployment.yaml   
+        kubectl apply -f deployment.yaml -n develop  
     - name: Wait for Steady State Check
       run: |
-        minikube service list
-        kubectl describe deployment.apps/nginx
+        minikube service list -n develop
+        kubectl describe deployment.apps/nginx -n develop
+    - name: Kubernetes Delete
+      run: |
+        kubectl delete namespace develop
