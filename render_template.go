@@ -4,6 +4,7 @@ package main
 import (
 	"os"
 	"text/template"
+	"gopkg.in/yaml.v2" // Import the yaml package
 )
 
 func main() {
