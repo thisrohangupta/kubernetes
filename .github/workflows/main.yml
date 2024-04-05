@@ -14,9 +14,7 @@ jobs:
     - name: Deploy to minikube
       run:
         kubectl apply -f deployment.yaml
-    - name: Test service URLs
+    - name: Print service URLs
       run: |
         minikube service list
-        minikube service nginx --url
-        echo "------------------opening the service------------------"
-        curl $(minikube service nginx --url)        
+        minikube service nginx --url     
