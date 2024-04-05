@@ -19,4 +19,4 @@ jobs:
         minikube service list
     - name: Wait for Steady State Check
       run: |
-        kubectl describe pods/nginx
+        kubectl describe deployment.apps/nginx
