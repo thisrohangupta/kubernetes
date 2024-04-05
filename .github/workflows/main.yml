@@ -7,14 +7,16 @@ jobs:
     name: Deploy Nginx
     steps:
     - uses: actions/checkout@v2
-    - name: Start minikube
+    - name: Infrastructure 
       uses: medyagh/setup-minikube@master
     - name: Try the cluster !
       run: kubectl get pods -A       
-    - name: Deploy to minikube
+    - name: Rolling Deploy
       run:
         kubectl apply -f deployment.yaml
-    - name: Print service URLs
+    - name: Print Services
       run: |
         minikube service list
-        minikube service nginx --url     
+    - name: Wait for Steady State Check
+      run: |
+        kubectl describe pods/nginx
