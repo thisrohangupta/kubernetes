@@ -20,14 +20,18 @@ jobs:
         kubectl create namespace develop
     - name: Fetch Files
       uses: actions/checkout@v2
+    # - name: Prepare Manifest
+    #   run: |
+    #     echo "Similuate the go template and rendered manifest"
+    #     cat deployment.yaml
+    #     cat values.yaml
     - name: Prepare Manifest
-      run: |
-        echo "Similuate the go template and rendered manifest"
-        cat deployment.yaml
-        cat values.yaml
+      uses: licenseware/helm@v1
+      with:
+        action: template deployment.yaml -f values.yaml
     - name: Dry Run
       run: |
-        kubectl apply -f deployment.yaml --dry-run
+        kubectl apply -f deployment.yaml --dry-run=client
     - name: Apply
       run: |
         kubectl apply -f deployment.yaml -n develop  
