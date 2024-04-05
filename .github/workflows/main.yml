@@ -11,8 +11,8 @@ jobs:
     steps:
     - name: Service Setup
       run: |
-        echo "Service Name: Nginx"
-        echo "Artifact Tag: Latest"
+        echo "Service Name: $SERVICE_NAME"
+        echo "Artifact Tag: $ARTIFACT_TAG"
     - name: Dynamic Provisioned Infrastructure - K8s Cluster
       uses: medyagh/setup-minikube@master
     - name: Fetch Files
