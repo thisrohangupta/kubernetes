@@ -13,7 +13,7 @@ jobs:
       run: |
         echo "Service Name: Nginx"
         echo "Artifact Tag: Latest"
-    - name: Infrastructure Setup
+    - name: Dynamic Provisioned Infrastructure - K8s Cluster
       uses: medyagh/setup-minikube@master
     - name: Fetch Files
       uses: actions/checkout@v2
