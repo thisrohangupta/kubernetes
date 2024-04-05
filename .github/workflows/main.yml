@@ -4,7 +4,7 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    name: build example and deploy to minikube
+    name: Deploy Nginx
     steps:
     - uses: actions/checkout@v2
     - name: Start minikube
