@@ -10,7 +10,7 @@ spec:
     template:
         metadata:
             labels:
-                app: {{ .name }}
+                app: nginx
         spec:
             containers:
                 - name: nginx
