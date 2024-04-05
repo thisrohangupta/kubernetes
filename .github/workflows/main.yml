@@ -1,6 +1,8 @@
 name: Deploy Service
 on:
-  - pull_request
+  push:
+    branches:
+      - main
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -15,7 +17,8 @@ jobs:
     - name: Fetch Files
       uses: actions/checkout@v2
     - name: Prepare Manifest
-      run:  cat deployment.yaml    
+      run: |
+        go run render_template.go deployment.yaml values.yaml > rendered_deployment.yaml   
     - name: Apply
       run: |
         kubectl apply -f deployment.yaml       
