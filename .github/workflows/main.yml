@@ -4,8 +4,9 @@ on:
     branches:
       - main
 jobs:
-  job1:
+  deployment:
     runs-on: ubuntu-latest
+    environment: dev
     name: Deploy Nginx
     steps:
     - name: Service Setup
@@ -21,7 +22,7 @@ jobs:
         go run render_template.go deployment.yaml values.yaml > rendered_deployment.yaml   
     - name: Apply
       run: |
-        kubectl apply -f deployment.yaml       
+        kubectl apply -f rendered_deployment.yaml       
     - name: Wait for Steady State Check
       run: |
         minikube service list
