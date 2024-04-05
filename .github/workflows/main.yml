@@ -18,11 +18,10 @@ jobs:
     - name: Fetch Files
       uses: actions/checkout@v2
     - name: Prepare Manifest
-      uses: yukitsune/template-cli@v0.1.0
-      with:
-        args: --input deployment.yaml \
-          --value "name=nginx" \
-          --output .
+      run: |
+        echo "Similuate the go template and rendered manifest"
+        cat deployment.yaml
+        cat values.yaml
     - name: Apply
       run: |
         kubectl apply -f deployment.yaml       
