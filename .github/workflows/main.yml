@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy Nginx
     steps:
+    - name: Service Setup
+      run: |
+        echo "Service Name: Nginx"
+        echo "Artifact Tag: Latest"
     - name: Infrastructure Setup
       uses: medyagh/setup-minikube@master
     - name: Fetch Files
