@@ -6,17 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy Nginx
     steps:
-    - uses: actions/checkout@v2
     - name: Infrastructure Setup
       uses: medyagh/setup-minikube@master
-    - name: Try the cluster!
-      run: kubectl get pods -A       
-    - name: Rolling Deploy
-      run:
-        kubectl apply -f deployment.yaml
-    - name: Print Services
+    - name: Fetch Files
+      uses: actions/checkout@v2
+    - name: Prepare Manifest
+      run:  cat deployment.yaml    
+    - name: Apply
       run: |
-        minikube service list
+        kubectl apply -f deployment.yaml       
     - name: Wait for Steady State Check
       run: |
+        minikube service list
         kubectl describe deployment.apps/nginx
