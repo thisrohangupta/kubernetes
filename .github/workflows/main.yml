@@ -24,7 +24,7 @@ jobs:
         cat values.yaml
     - name: Apply
       run: |
-        kubectl apply -f deployment.yaml -f values.yaml     
+        kubectl apply -f deployment.yaml   
     - name: Wait for Steady State Check
       run: |
         minikube service list
